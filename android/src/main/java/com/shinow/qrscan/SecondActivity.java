@@ -10,7 +10,6 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -22,13 +21,12 @@ import com.uuzuche.lib_zxing.activity.CaptureFragment;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 public class SecondActivity extends AppCompatActivity {
-    private static final String TAG = SecondActivity.class.getSimpleName();
 
     public static boolean isLightOpen = false;
     private int REQUEST_IMAGE = 101;
     private LinearLayout lightLayout;
     private LinearLayout backLayout;
-    private LinearLayout photoLayout;
+    // private LinearLayout photoLayout;
     private SensorManager sensorManager;
     private Sensor lightSensor;
     private SensorEventListener sensorEventListener;
@@ -44,7 +42,7 @@ public class SecondActivity extends AppCompatActivity {
 
         lightLayout = findViewById(R.id.scan_light);
         backLayout = findViewById(R.id.scan_back);
-        photoLayout = findViewById(R.id.choose_photo);
+        // photoLayout = findViewById(R.id.choose_photo);
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
@@ -88,15 +86,15 @@ public class SecondActivity extends AppCompatActivity {
                 SecondActivity.this.finish();
             }
         });
-        photoLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                SecondActivity.this.startActivityForResult(intent, REQUEST_IMAGE);
-            }
-        });
+        // photoLayout.setOnClickListener(new View.OnClickListener() {
+        //     @Override
+        //     public void onClick(View v) {
+        //         Intent intent = new Intent();
+        //         intent.setAction(Intent.ACTION_PICK);
+        //         intent.setType("image/*");
+        //         SecondActivity.this.startActivityForResult(intent, REQUEST_IMAGE);
+        //     }
+        // });
     }
 
     @Override
@@ -115,16 +113,6 @@ public class SecondActivity extends AppCompatActivity {
                 SecondActivity.this.finish();
             }
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent resultIntent = new Intent();
-        Bundle bundle = new Bundle();
-        bundle.putInt(CodeUtils.RESULT_TYPE, CodeUtils.RESULT_FAILED);
-        resultIntent.putExtras(bundle);
-        SecondActivity.this.setResult(RESULT_OK, resultIntent);
-        SecondActivity.this.finish();
     }
 
     private CodeUtils.AnalyzeCallback analyzeCallback = new CodeUtils.AnalyzeCallback() {

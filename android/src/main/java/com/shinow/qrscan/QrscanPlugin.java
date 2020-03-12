@@ -40,11 +40,21 @@ public class QrscanPlugin implements MethodCallHandler, PluginRegistry.ActivityR
 
     public QrscanPlugin(Activity activity) {
         this.activity = activity;
-        CheckPermissionUtils.initPermission(this.activity);
+        // CheckPermissionUtils.initPermission(this.activity);
     }
 
     @Override
     public void onMethodCall(MethodCall call, Result result) {
+        String[] permissions = CheckPermissionUtils.checkPermission(activity);
+        if (permissions.length != 0) {
+            CheckPermissionUtils.initPermission(activity);
+            String[] permission = CheckPermissionUtils.checkPermission(activity);
+            if (permission.length != 0) {
+                result.success(null);
+                return;
+            }
+        }
+
         switch (call.method) {
             case "scan":
                 this.result = result;
@@ -115,8 +125,6 @@ public class QrscanPlugin implements MethodCallHandler, PluginRegistry.ActivityR
                         if (bundle.getInt(RESULT_TYPE) == RESULT_SUCCESS) {
                             String barcode = bundle.getString(CodeUtils.RESULT_STRING);
                             this.result.success(barcode);
-                        }else{
-                            this.result.success(null);
                         }
                     }
                 }

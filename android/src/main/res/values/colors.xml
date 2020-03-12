@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#ff9900</color>
+    <color name="colorPrimaryDark">#ff9900</color>
+    <color name="colorAccent">#ff9900</color>
 
-    <color name="scan_corner_color_green">#0effc2</color>
-    <color name="scan_corner_color_blue">#12C4FF</color>
+    <color name="scan_corner_color_green">#ff9900</color>
+    <color name="scan_corner_color_blue">#ff9900</color>
 </resources>
